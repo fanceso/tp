@@ -125,25 +125,24 @@ public class Power {
         SimpleDateFormat timeFormat = new SimpleDateFormat(DATE_TIME_FORMAT, Locale.ENGLISH);
         Date onTimeValue;
         Date offTimeValue;
-        double timeUsed = 0;
+        double millisecondsUsed = 0;
 
         if (this.onTime != null) {
             onTimeValue = timeFormat.parse(this.onTime);
             if (!this.status) {
                 offTimeValue = timeFormat.parse(this.offTime);
-                timeUsed = offTimeValue.getTime() - onTimeValue.getTime();
+                millisecondsUsed = offTimeValue.getTime() - onTimeValue.getTime();
                 // System time cannot be negative time
-                assert timeUsed >= 0 : "System Time is not correct! " + timeUsed;
+                assert millisecondsUsed >= 0 : "System Time is not correct! " + millisecondsUsed;
                 this.onTime = this.offTime;
             } else {
                 Date currentUsedTime = timeFormat.parse(getCurrentTime());
-                timeUsed = currentUsedTime.getTime() - onTimeValue.getTime();
+                millisecondsUsed = currentUsedTime.getTime() - onTimeValue.getTime();
                 this.onTime = getCurrentTime();
             }
         }
 
-        // For simulation purpose, 1 second in System equals to 10 minutes in SmartHomeBot
-        totalHours = timeUsed / (1000 * 6);
+        totalHours = millisecondsUsed / (1000 * 60 * 60);
         return totalHours;
     }
 
@@ -161,8 +160,9 @@ public class Power {
 
     private void computeTotalPower() {
         computePower();
-        this.totalPowerConsumption += this.powerUsed;
-        assert this.totalPowerConsumption >= 0 : "totalPowerConsumption cannot be negative";
+        // Rounding off to 2 decimal places
+        this.totalPowerConsumption += Math.round(this.powerUsed * 100.0) / 100.0;
+        assert this.totalPowerConsumption >= 0 : "Total power consumption cannot be negative";
     }
 
     /**

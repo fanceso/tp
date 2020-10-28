@@ -17,7 +17,7 @@ public class ResetCommand extends Command {
             return new CommandResult(LINE + MESSAGE_LIST_NO_APPLIANCES);
         } else {
             for (Appliance a : applianceList.getAllAppliance()) {
-                a.resetPower();
+                a.resetPowerUsage();
             }
             return new CommandResult(LINE + MESSAGE_USAGE_RESET);
         }

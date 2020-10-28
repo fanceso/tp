@@ -23,7 +23,7 @@ public abstract class Appliance {
             throws LocationNotFoundException, InvalidApplianceNameException {
 
         this.locationList = locationList;
-        if (locationList.isLocationCreated(location) && (!locationList.isLocationCreated(name))) {
+        if (this.locationList.isLocationCreated(location) && (!this.locationList.isLocationCreated(name))) {
             this.name = name;
             this.location = location;
             this.wattage = wattage;
@@ -80,7 +80,7 @@ public abstract class Appliance {
         return appliancePower.offAppliance();
     }
 
-    public void resetPower() {
+    public void resetPowerUsage() {
         appliancePower.resetPower();
     }
 
