@@ -105,7 +105,9 @@ public class ReadStorageFile extends StorageFile {
             String locations = location.substring(openBracesIndex, closeBracesIndex);
             String[] stringSplit = locations.split(",");
             for (String locationName : stringSplit) {
-                locationList.addLocation(locationName.trim());
+                if (!locationName.isEmpty()) {
+                    locationList.addLocation(locationName.trim());
+                }
             }
         } catch (IndexOutOfBoundsException | DuplicateDataException e) {
             throw new FileCorruptedException();

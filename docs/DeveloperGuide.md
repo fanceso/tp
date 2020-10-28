@@ -116,26 +116,28 @@ The *CommandResult* shown above explains the Sequence Diagram of the CommandResu
 The Storage module manages the load and save operations of the SmartHomeBot. It consist of two different classes, 
 the ReadStorageFile class, and the WriteToFile class. As of the name stated, the function of WriteStorageFile class is 
 to store the data into a .txt file for future usage. The ReadStorageFile class is to load the previously stored data 
-from the .txt file back into the SmartHomeBot when it start up. The class diagram for storage module is shown below.
+from the .txt file back into the SmartHomeBot when it start up. 
+
+The class diagram for storage module is shown below:
 
 ![StorageFile Model Component](images/diagrams/ClassDiagram_Storage.png)
 
-##### Process of saving data into Storage File
-After each command input by the user, SmartHomeBot perform the execute() method in SaveStorageFile. This allows
+##### Process of writing data into Storage File
+After each command input by the user, SmartHomeBot will perform the execute() method in SaveStorageFile. This allows
 the program to continuously save the changes made by the user into the .txt file and prevent the lost of updates made 
 by the user.
 
 Within the execute() method, the createFile() method will be performed to create a new .txt file if there is no .txt 
 file exist. Then the clearFile() method will be performed to empty .txt file. After that all the data updated by the 
 user will be written into the .txt file. This process will be carried out each time the user input a command. The first
-line in the .txt file will always be the locationlist and subsequent lines will be all the appliances, each occupying 
+line in the .txt file will always be the LocationList and subsequent lines will be all the appliances, each occupying 
 one line each. The appliances will be written together with their parameters in each line. 
 
-The sequence diagram for SaveStorageFile is shown below:
+The sequence diagram for WriteStorageFile is shown below:
 
 ![StorageFile Model Component](images/diagrams/Sequence_WriteStorageFile.png)
 
-##### Process of retrieving data into the program
+##### Process of retrieving data back into the program
 On startup, SmartHomeBot will perform the execute() method in ReadStorageFile. This allows the program to retrieve all 
 stored data saved previously from the .txt file back into the program to be used again.
 
@@ -151,7 +153,7 @@ into static (Fan, AirConditioner, Lights, SmartPlug) depending on their types. T
 the applianceList. The powerConsumption of each appliance will also be updated to keep track of the power Usage of each 
 appliance.
 
-The sequence diagram for SaveStorageFile is shown below:
+The sequence diagram for ReadStorageFile is shown below:
 
 ![StorageFile Model Component](images/diagrams/Sequence_ReadStorageFile.png)
 

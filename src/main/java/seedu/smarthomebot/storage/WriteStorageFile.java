@@ -36,7 +36,7 @@ public class WriteStorageFile extends StorageFile {
         }
     }
 
-    public void createFile() {
+    private void createFile() {
         try {
             assert FILE_PATH.equals("data/SmartHomeBot.txt") : "filePath should be data/SmartHome.txt";
             File myObj = new File(FILE_PATH);
@@ -52,7 +52,7 @@ public class WriteStorageFile extends StorageFile {
         }
     }
 
-    public void clearFile() {
+    private void clearFile() {
         try {
             assert FILE_PATH.equals("data/SmartHomeBot.txt") : "filePath should be data/SmartHome.txt";
             PrintWriter writer = new PrintWriter(FILE_PATH);
